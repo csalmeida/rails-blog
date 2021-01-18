@@ -1,4 +1,7 @@
 class CommentsController < ApplicationController
+  http_basic_authenticate_with name: "test", password: "test",
+  only: :destroy
+
   include Statuses
   
   def create
