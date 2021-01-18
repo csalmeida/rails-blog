@@ -1,4 +1,6 @@
 class ArticlesController < ApplicationController
+  include Statuses
+
   def index
     @articles = Article.all
   end
@@ -9,6 +11,7 @@ class ArticlesController < ApplicationController
 
   def new
     @article = Article.new
+    valid_statuses()
   end
 
   def create
@@ -23,10 +26,12 @@ class ArticlesController < ApplicationController
 
   def edit
     @article = Article.find(params[:id])
+    valid_statuses()
   end
 
   def update
     @article = Article.find(params[:id])
+    valid_statuses()
 
     if @article.update(article_params)
       redirect_to @article
@@ -44,6 +49,6 @@ class ArticlesController < ApplicationController
 
   private
     def article_params
-      params.require(:article).permit(:title, :body)
+      params.require(:article).permit(:title, :body, :status)
     end
 end

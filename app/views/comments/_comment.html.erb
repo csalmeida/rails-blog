@@ -3,7 +3,15 @@
   <%= comment.commenter %>
 </p>
 
+<% comment.errors.full_messages_for(:status).each do |message| %>
+  <div><%= message %></div>
+<% end %>
+
 <p>
   <strong>Comment:</strong>
   <%= comment.body %>
 </p>
+
+<p><%= link_to 'Destroy Comment', [comment.article, comment],
+        method: :delete,
+        data: { confirm: "Are you sure?" } %></p>

@@ -9,9 +9,9 @@
 </ul>
 
 <h2>Comments</h2>
-<% @article.comments.each do |comment| %>
-  <%= render @article.comments %>
-<% end %>
+
+<%= render @article.comments %>
+
 
 <h2>Add a comment:</h2>
-<%= render 'comments/form', article: @article %>
+<%= render 'comments/form', article: @article, errors: session[:comment_errors] %>
