@@ -3,7 +3,7 @@
     <%= form.label :commenter %><br>
     <%= form.text_field :commenter %>
 
-    <% if errors["commenter"] %>
+    <% if errors && errors["commenter"] %>
       <% errors["commenter"].each do |error| %>
         <p><span style="color:red;"><%= error %></span></p>
       <% end %>
@@ -14,7 +14,7 @@
     <%= form.label :body %><br>
     <%= form.text_area :body %>
 
-    <% if errors["body"] %>
+    <% if errors && errors["body"] %>
       <% errors["body"].each do |error| %>
       <p><span style="color:red;"><%= error %></span></p>
       <% end %>
