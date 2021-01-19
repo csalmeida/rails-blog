@@ -1,4 +1,14 @@
-# README
+# Rails Blog
+
+App created by following the Ruby on Rails Getting Started guide.
+
+> https://guides.rubyonrails.org/getting_started.html
+
+Built using version `6.1.1` of Rails.
+
+<hr>
+
+## Default content the README comes with
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
