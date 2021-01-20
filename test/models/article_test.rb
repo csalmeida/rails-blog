@@ -1,6 +1,9 @@
 require "test_helper"
 
 class ArticleTest < ActiveSupport::TestCase
+  include Statuses
+  expected_statuses = ['public', 'private', 'archived']
+
   test "should not save article without title" do
    
     article = articles(:no_title)
@@ -24,7 +27,17 @@ class ArticleTest < ActiveSupport::TestCase
     # Testing with a status that is not valid
     # Status could only be one of the values available in the VALID_STATUSES array
     article.status = "invalid status"
-    assert_not article.valid?, "Article with invalid status passed model validation"
+    assert_not_includes VALID_STATUSES, article.status, "Article with invalid status passed model validation"
     assert_not article.save, "Saved an article with an invalid status"
+  end
+
+  test "validates article with permited statuses only" do
+    article = articles(:valid)
+
+    VALID_STATUSES.each do |status|
+      article.status = status
+      assert_includes expected_statuses, article.status, "Invalid status present is Statuses concern was assigned to an article"
+      assert article.valid?, "Could not validate article with valid status (#{status})"
+    end
   end
 end
