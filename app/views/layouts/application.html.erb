@@ -11,6 +11,11 @@
   </head>
 
   <body>
+    <% flash.each do |type, message| %>
+      <div class="notice">
+        <p><%= message %></p>
+      </div>
+    <% end %>
     <h1><%= link_to "Rails Blog", root_path %></h1>
     <p>A Rails app build from following Rails Guides.</p>
     <hr>
