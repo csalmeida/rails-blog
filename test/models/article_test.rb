@@ -2,12 +2,13 @@ require "test_helper"
 
 class ArticleTest < ActiveSupport::TestCase
   test "should not save article without title" do
-    article = Article.new(body: "A long piece of text", status: 'public')
+   
+    article = articles(:no_title)
     assert_not article.save, "Saved an article without a title"
   end
 
   test "should not save article without body or short amount of text" do
-    article = Article.new(title: 'This article has no body', status: 'public')
+    article = articles(:no_body)
     assert_not article.save, "Saved an article without a body"
 
     # Tests whether the body has the right amount of text
@@ -17,7 +18,7 @@ class ArticleTest < ActiveSupport::TestCase
   end
 
   test "should not save article without status or an invalid one" do
-    article = Article.new(title: 'This article has no body', body: "A long piece of text", status: nil)
+    article = articles(:no_status)
     assert_not article.save, "Saved an article without a status"
 
     # Testing with a status that is not valid

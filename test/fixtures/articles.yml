@@ -1,9 +1,21 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  body: MyText
+valid:
+  title: How Ruby on Rails Fixtures Work
+  body: Fixtures are sample data that get added to the test database when tests run.
+  status: public
 
-two:
-  title: MyString
-  body: MyText
+no_title:
+  body: A long piece of text
+  status: public
+
+no_body:
+  title: This article has no body
+  status: public
+
+no_status:
+  title: This article has no status
+  body: A long piece of text
+
+
+
