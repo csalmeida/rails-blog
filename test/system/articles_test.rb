@@ -28,4 +28,21 @@ class ArticlesTest < ApplicationSystemTestCase
 
     assert_text "Creating an Article"
   end
+
+  test "removing an article and confirming" do
+    # Pulls in an article from fixtures.
+    article = articles(:valid)
+
+    visit articles_path
+    
+    click_on article.title
+
+    # Accept the pop up when it shows
+    accept_confirm do
+      click_on "Delete"
+    end
+
+    # Checks the article is no longer present.
+    assert_no_text article.title
+  end
 end
