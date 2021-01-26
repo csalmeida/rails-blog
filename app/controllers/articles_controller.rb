@@ -2,8 +2,10 @@ class ArticlesController < ApplicationController
   # Authentication is not present when running tests.
   http_basic_authenticate_with name: "test", password: "test",
   except: [:index, :show] unless Rails.env.test?
-  
+
   include Statuses
+
+  before_action :valid_statuses, exclude: [:index, :show, :destroy]
 
   def index
     @articles = Article.all
@@ -15,7 +17,6 @@ class ArticlesController < ApplicationController
 
   def new
     @article = Article.new
-    valid_statuses()
   end
 
   def create
@@ -31,12 +32,10 @@ class ArticlesController < ApplicationController
 
   def edit
     @article = Article.find(params[:id])
-    valid_statuses()
   end
 
   def update
     @article = Article.find(params[:id])
-    valid_statuses()
 
     if @article.update(article_params)
       redirect_to @article
