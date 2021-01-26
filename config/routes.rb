@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
-  resources :users
   root "articles#index"
+
+  resources :users, only: [:create, :show]
+
+  # User authentication routes
+  get "/signup", to: "users#new"
+  get "/signin". to: "sessions#new"
+  post "/sessions" to: "sessions#create"
+  delete "/sessions", to: "sessions#destroy"
 
   resources :articles do
     resources :comments
