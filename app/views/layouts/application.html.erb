@@ -18,6 +18,16 @@
     <% end %>
     <h1><%= link_to "Rails Blog", root_path %></h1>
     <p>A Rails app build from following Rails Guides.</p>
+    <nav class="navigation">
+      <ul>
+        <% if logged_in? %>
+          <li><%= link_to("Sign Out", sessions_path, method: :delete) %></li>
+        <% else %>
+          <li><%= link_to("Sign In", signin_path) %></li>
+          <li><%= link_to("Sign Up", signup_path) %></li>
+        <% end %>
+      </ul>
+    </nav>
     <hr>
     
     <%= yield %>
