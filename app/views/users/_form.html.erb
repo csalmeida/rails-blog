@@ -8,7 +8,7 @@
   <div class="field">
     <%= form.label :email %>
     <%= form.text_field :email %>
-    <%= render_field_errors("email", user.errors) %>
+    <%= render_field_errors(:email, user.errors) %>
   </div>
 
   <div class="field">
@@ -20,7 +20,7 @@
   <div class="field">
     <%= form.label :password_confirmation %>
     <%= form.password_field :password_confirmation %>
-    <%= render_field_errors("password_confirmation", user.errors) %>
+    <%= render_field_errors(:password_confirmation, user.errors) %>
   </div>
 
   <div class="actions">
