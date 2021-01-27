@@ -1,0 +1,18 @@
+<%= form_with(url: sessions_path) do |form| %>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+    <%# <%= render_field_errors(:email, session.errors) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password %>
+    <%= form.password_field :password %>
+    <%# <%= render_field_errors(:password, session.errors) %> 
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Sign In" %>
+  </div>
+<% end %>
