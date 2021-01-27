@@ -2,23 +2,13 @@
   <p>
     <%= form.label :commenter %><br>
     <%= form.text_field :commenter %>
-
-    <% if errors && errors["commenter"] %>
-      <% errors["commenter"].each do |error| %>
-        <p><span style="color:red;"><%= error %></span></p>
-      <% end %>
-    <% end %>
+    <%= render_field_errors("commenter", errors) %>
   </p>
   
   <p>
     <%= form.label :body %><br>
     <%= form.text_area :body %>
-
-    <% if errors && errors["body"] %>
-      <% errors["body"].each do |error| %>
-      <p><span style="color:red;"><%= error %></span></p>
-      <% end %>
-    <% end %>
+    <%= render_field_errors("body", errors) %>
   </p>
 
   <p>
