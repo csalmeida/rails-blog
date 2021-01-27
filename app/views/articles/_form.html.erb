@@ -2,26 +2,20 @@
   <div>
     <%= form.label :status %><br>
     <%= form.select :status, @valid_statuses %><br>
-    <% article.errors.full_messages_for(:status).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
+    <%= render_field_errors(:status, article.errors) %>
   </div>
 
 
   <div><br>
     <%= form.label :title %><br>
     <%= form.text_field :title %><br>
-    <% article.errors.full_messages_for(:title).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
+    <%= render_field_errors(:title, article.errors) %>
   </div>
 
   <div><br>
     <%= form.label :body %><br>
     <%= form.text_area :body %><br>
-    <% article.errors.full_messages_for(:body).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
+    <%= render_field_errors(:body, article.errors) %>
   </div>
 
   <div>
