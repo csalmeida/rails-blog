@@ -1,11 +1,8 @@
 class ArticlesController < ApplicationController
-  # Authentication is not present when running tests.
-  http_basic_authenticate_with name: "test", password: "test",
-  except: [:index, :show] unless Rails.env.test?
-
   include Statuses
 
-  before_action :valid_statuses, exclude: [:index, :show, :destroy]
+  before_action :authorized, except: [:index, :show]
+  before_action :valid_statuses, except: [:index, :show, :destroy]
 
   def index
     @articles = Article.all

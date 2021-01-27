@@ -1,9 +1,6 @@
 class CommentsController < ApplicationController
-  # Authentication is not present when running tests.
-  http_basic_authenticate_with name: "test", password: "test",
-  only: :destroy unless Rails.env.test?
-
   include Statuses
+  before_action :authorized
   
   def create
     @article = Article.find(params[:article_id])
