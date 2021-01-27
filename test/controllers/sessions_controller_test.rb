@@ -22,6 +22,11 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
       email: @user.email
     }
 
-    assert_redirected_to signin_path
+    assert_redirected_to signin_url
+  end
+
+  test "should destroy session" do
+    delete sessions_path
+    assert_redirected_to root_path
   end
 end
