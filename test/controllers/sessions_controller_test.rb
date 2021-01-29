@@ -1,6 +1,20 @@
 require "test_helper"
 
+# Sign in tests are done manually
+# Sign in helpers are also tested here
+
 class SessionsControllerTest < ActionDispatch::IntegrationTest
+  test "user can sign in via test helper" do
+    @user = users(:valid)
+    sign_in_as(@user, "secret")
+    assert_equal session[:user_id].to_i, @user.id
+  end
+
+  test "user can sign out via test helper" do
+    sign_out()
+    assert_nil session[:user_id]
+  end
+
   test "should get sign in action (#new)" do
     get signin_path
     assert_response :success
