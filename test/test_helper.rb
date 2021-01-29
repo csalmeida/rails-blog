@@ -19,5 +19,8 @@ class ActiveSupport::TestCase
     post sessions_url, params: { email: user.email, password: password }
   end
 
+  def sign_out
+    delete sessions_url
+  end
 end
 
