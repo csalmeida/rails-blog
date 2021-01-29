@@ -1,13 +1,17 @@
 require "test_helper"
 
 class BlogFlowTest < ActionDispatch::IntegrationTest
+
   # An integration test, asserts something the user can do in the application.
   test "can see articles page" do
+    sign_out()
     get "/"
     assert_select "h1", "Articles"
   end
 
   test "can create an article" do
+    sign_in_as(users(:valid), "secret")
+    
     get "/articles/new"
     assert_response :success
 
