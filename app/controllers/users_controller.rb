@@ -56,6 +56,9 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     if @user.destroy
+      # Sign user out before deletion
+      sign_out()
+
       respond_to do |format|
         format.html { redirect_to root_path, notice: 'User was successfully destroyed.' }
       end
