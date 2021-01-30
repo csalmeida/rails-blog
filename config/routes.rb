@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root "articles#index"
 
-  resources :users, only: [:create, :show, :edit, :update]
+  resources :users, only: [:create, :show, :edit, :update, :destroy]
 
   # User authentication routes
   get "/signup", to: "users#new"
