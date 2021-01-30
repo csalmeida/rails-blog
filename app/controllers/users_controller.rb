@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticated, only: [:show, :edit, :update, :destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :authorized, only: [:show, :edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -66,6 +67,7 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
+      puts "😳 User id in params #{params[:id]}"
       @user = User.find(params[:id])
     end
 

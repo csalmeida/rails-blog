@@ -8,7 +8,7 @@ module Authentication
 
   def current_user
     if session[:user_id]
-      @user = User.find(session[:user_id])
+      @current_user = User.find(session[:user_id])
     end
   end
 
@@ -20,8 +20,17 @@ module Authentication
     redirect_to signin_path unless logged_in?
   end
 
-  # Resource is an Active Record object that is either a user or can point to a user.
-  def allowed?(resource)
-    resource == current_user
+  def authorized
+    if logged_in?
+      message = "You are not allowed to perform this action 😳"
+      # If user is trying to access someone else's user actions.
+      if @user.class == User
+        unless current_user.id === @user.id
+          redirect_to root_path, notice: message
+        end
+      else
+        redirect_to root_path, notice: message unless current_user.id === params[:user_id]
+      end
+    end
   end
 end
