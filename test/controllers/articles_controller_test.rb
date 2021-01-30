@@ -4,6 +4,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
   # called before every single test
   setup do
     @article = articles(:valid)
+    sign_in_as(users(:valid), 'secret')
   end
 
   # called after every single test
