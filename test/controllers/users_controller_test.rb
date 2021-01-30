@@ -74,16 +74,19 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to user_url(@user)
   end
 
-  test "should not access destroy user" do
-
-    assert_raises(ActionController::RoutingError) do
+  test "should destroy own user account" do
+    assert_difference('User.count', -1) do
       delete user_url(@user)
     end
 
-    # assert_difference('User.count', -1) do
-    #   delete user_url(@user)
-    # end
+    assert_redirected_to root_url
+  end
 
-    # assert_redirected_to root_url
+  test "should not remove a user other than its own" do
+    assert_no_difference('User.count', -1) do
+      delete user_url(users(:alta))
+    end
+
+    assert_redirected_to root_url
   end
 end
