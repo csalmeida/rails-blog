@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
   include Statuses
 
-  before_action :authorized, except: [:index, :show]
+  before_action :authenticated, except: [:index, :show]
   before_action :valid_statuses, except: [:index, :show, :destroy]
 
   def index

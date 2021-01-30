@@ -1,4 +1,4 @@
-module Authorization
+module Authentication
   extend ActiveSupport::Concern
 
   # This block is called within the scope of the class currently running at.
@@ -16,7 +16,12 @@ module Authorization
     !!current_user
   end
 
-  def authorized
+  def authenticated
     redirect_to signin_path unless logged_in?
+  end
+
+  # Resource is an Active Record object that is either a user or can point to a user.
+  def allowed?(resource)
+    resource == current_user
   end
 end

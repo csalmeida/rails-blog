@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   include Statuses
-  before_action :authorized
+  before_action :authenticated
   
   def create
     @article = Article.find(params[:article_id])
