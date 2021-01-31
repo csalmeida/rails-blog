@@ -4,18 +4,22 @@ valid:
   title: How Ruby on Rails Fixtures Work
   body: Fixtures are sample data that get added to the test database when tests run.
   status: public
+  user: valid
 
 no_title:
   body: A long piece of text
   status: public
+  user: valid
 
 no_body:
   title: This article has no body
   status: public
+  user: valid
 
 no_status:
   title: This article has no status
   body: A long piece of text
+  user: valid
 
 
 
