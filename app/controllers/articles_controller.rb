@@ -2,8 +2,9 @@ class ArticlesController < ApplicationController
   include Statuses
 
   before_action :authenticated, except: [:index, :show]
-  before_action :authorized, except: [:index, :show]
+  before_action :authorized, except: [:new, :create, :index, :show]
   before_action :valid_statuses, except: [:index, :show, :destroy]
+  before_action :set_user_id, only: [:destroy]
 
   def index
     @articles = Article.all
@@ -19,6 +20,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
+    @article.user_id = current_user.id
 
     if @article.save
       flash[:notice] = "Article was successfully created."
@@ -51,6 +53,10 @@ class ArticlesController < ApplicationController
 
   private
     def article_params
-      params.require(:article).permit(:title, :body, :status)
+      params.require(:article).permit(:title, :body, :status, :user_id)
+    end
+
+    def set_user_id
+      params[:user_id] = Article.find(params[:id]).user_id
     end
 end
