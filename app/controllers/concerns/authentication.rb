@@ -27,13 +27,15 @@ module Authentication
   def authorized
     if logged_in?
       message = "You are not allowed to perform this action 😳"
+      # Used to retrieve user id as param
+      controller_symbol = params[:controller].singularize.parameterize.underscore.to_sym
       # If user is trying to access someone else's user actions.
       if @user.class == User
         unless current_user.id === @user.id
           redirect_to root_path, notice: message
         end
-      else
-        redirect_to root_path, notice: message unless current_user.id === params[:user_id]
+      elsif !controller_symbol.nil? && params.has_key?(controller_symbol)
+        redirect_to root_path, notice: message unless current_user.id === params[controller_symbol][:user_id].to_i
       end
     end
   end
