@@ -7,12 +7,22 @@ class ArticlesTest < ApplicationSystemTestCase
   #   assert_selector "h1", text: "Articles"
   # end
 
+  setup do
+    @user = users(:valid)
+  end
+
   test "viewing the index" do
     visit articles_path
     assert_selector "h1", text: "Articles"
   end
 
   test "creating an article" do
+    visit signin_url
+
+    fill_in "Email", with: @user.email
+    fill_in "Password", with: 'secret'
+    click_button "Sign In"
+    
     visit articles_path
 
     click_on "New Article"
@@ -30,6 +40,12 @@ class ArticlesTest < ApplicationSystemTestCase
   end
 
   test "removing an article and confirming" do
+    visit signin_url
+
+    fill_in "Email", with: @user.email
+    fill_in "Password", with: 'secret'
+    click_button "Sign In"
+
     # Pulls in an article from fixtures.
     article = articles(:valid)
 
