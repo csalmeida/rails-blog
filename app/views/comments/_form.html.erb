@@ -1,15 +1,13 @@
 <%= form_with model: [ article, article.comments.build ] do |form| %>
-  <p>
-    <%= form.label :commenter %><br>
-    <%= form.text_field :commenter %>
-    <%= render_field_errors("commenter", errors) %>
-  </p>
+  <p><%= current_user.email %></p>
   
   <p>
     <%= form.label :body %><br>
     <%= form.text_area :body %>
     <%= render_field_errors("body", errors) %>
   </p>
+
+  <%= form.hidden_field :status , :value => "public"  %>
 
   <p>
     <%= form.submit %>

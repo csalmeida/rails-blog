@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
   def create
     @article = Article.find(params[:article_id])
     @comment = @article.comments.new(comment_params)
+    @comment.user_id = current_user.id
     @comment.status = 'public'
     @comment.save
 
@@ -21,11 +22,16 @@ class CommentsController < ApplicationController
   def destroy
     @article = Article.find(params[:article_id])
     @comment = @article.comments.find(params[:id])
-    @comment.destroy
+    if @comment.destroy
+      redirect_to @article
+    else
+      render @article
+    end
+
   end
 
   private
    def comment_params
-    params.require(:comment).permit(:commenter, :body)
+    params.require(:comment).permit(:body)
    end
 end

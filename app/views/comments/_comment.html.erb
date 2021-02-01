@@ -1,6 +1,6 @@
 <p>
   <strong>Commenter:</strong>
-  <%= comment.commenter %>
+  <p><%= !comment.user.nil? ? comment.user.email : comment.user_id %></p>
 </p>
 
 <% comment.errors.full_messages_for(:status).each do |message| %>

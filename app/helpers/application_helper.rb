@@ -18,7 +18,7 @@ module ApplicationHelper
         end
       end
     else
-      if errors && errors.size > 0
+      if errors && errors.size > 0 && !errors[field_name].nil?
 
         errors[field_name].each do |error|
           messages += <<-HTML
