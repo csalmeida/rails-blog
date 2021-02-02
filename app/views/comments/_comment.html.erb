@@ -1,17 +1,18 @@
-<p>
-  <strong>Commenter:</strong>
-  <p><%= !comment.user.nil? ? comment.user.email : comment.user_id %></p>
-</p>
+<p><strong><%= !comment.user.nil? ? comment.user.email : comment.user_id %></strong></p>
 
 <% comment.errors.full_messages_for(:status).each do |message| %>
   <div><%= message %></div>
 <% end %>
 
 <p>
-  <strong>Comment:</strong>
   <%= comment.body %>
 </p>
 
-<p><%= link_to 'Destroy Comment', [comment.article, comment],
+
+<% if comment.user === current_user %>
+  <p><%= link_to 'Destroy Comment', [comment.article, comment],
         method: :delete,
         data: { confirm: "Are you sure?" } %></p>
+<% end %>
+
+<hr>
