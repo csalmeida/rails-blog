@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   include Statuses
   before_action :authenticated
-  before_action :authorized, except: [:show]
+  before_action :authorized, except: [:create]
   
   def create
     @article = Article.find(params[:article_id])
@@ -22,11 +22,20 @@ class CommentsController < ApplicationController
   def destroy
     @article = Article.find(params[:article_id])
     @comment = @article.comments.find(params[:id])
-    if @comment.destroy
-      redirect_to @article
+
+    if @comment.user === current_user
+      if @comment.destroy
+        redirect_to @article
+      else
+        render @article
+      end
     else
-      render @article
+      flash[:notice] = "You're not allowed to delete this comment."
+      redirect_to @article
     end
+
+
+
 
   end
 
